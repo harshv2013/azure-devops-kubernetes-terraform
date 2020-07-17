@@ -4,7 +4,7 @@ resource "azurerm_resource_group" "resource_group" {
 }
 
 provider "azurerm" {
-  version = "~>3.0.0"
+  version = "~>2.0.0"
   features {}
 }
 
