@@ -19,7 +19,6 @@ trigger:
 
 # pool:
 #   vmImage: $(operatingSystem)
-
 pool:
   vmImage: 'ubuntu-latest'
 
