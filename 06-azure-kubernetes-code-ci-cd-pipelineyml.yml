@@ -68,6 +68,7 @@ stages:
     - task: KubernetesManifest@0
       inputs:
         action: 'deploy'
+        apiVersion: 'apps/v1'
         kubernetesServiceConnection: 'azure-kubernetes-connection'
         namespace: 'default'
         manifests: '$(System.ArtifactsDirectory)/configuration/kubernetes/deployment.yaml'
