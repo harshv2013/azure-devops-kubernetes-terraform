@@ -3,6 +3,8 @@
 # Uses default VPC and Subnet. Create Your Own VPC and Private Subnets for Prod Usage.
 # terraform-backend-state-in28minutes-123
 # AKIA4AHVNOD7OOO6T4KI
+# terraform-backend-state-9670
+# AKIAZRI652LARG4CZAV5
 
 
 terraform {
@@ -33,7 +35,7 @@ module "in28minutes-cluster" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name    = "in28minutes-cluster"
   cluster_version = "1.14"
-  subnets         = ["subnet-3f7b2563", "subnet-4a7d6a45"] #CHANGE
+  subnets         = ["subnet-8aa124f1", "subnet-a6a6d5ea","subnet-abadafc3"] #CHANGED
   #subnets = data.aws_subnet_ids.subnets.ids
   vpc_id          = aws_default_vpc.default.id
 
