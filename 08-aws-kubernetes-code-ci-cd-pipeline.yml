@@ -9,7 +9,8 @@ resources:
 - repo: self
 
 variables:
-  tag: 49
+  # tag: 49
+  tag: '$(Build.BuildId)'
   #'$(Build.BuildId)'
 
 stages:
@@ -21,6 +22,23 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
+    - task: Docker@2
+      displayName: Build and push an image
+      inputs:
+        containerRegistry: 'harsh2013-docker-hub'
+        repository: 'harsh2013/currency-exchange-devops'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: '$(tag)'
+
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        command: build
+        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+        tags: |
+          $(tag)
+    
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)'
@@ -36,8 +54,8 @@ stages:
 - stage: Deploy
   displayName: Deploy image
   jobs:  
-  - job: Build
-    displayName: Build
+  - job: Deploy
+    displayName: Deploy
     pool:
       vmImage: 'ubuntu-latest'
     steps:
@@ -57,13 +75,7 @@ stages:
         
 
 
-    # - task: Docker@2
-    #   displayName: Build an image
-    #   inputs:
-    #     command: build
-    #     dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-    #     tags: |
-    #       $(tag)
+
 
 # ------Build Stage-----
 # Bild Docker
